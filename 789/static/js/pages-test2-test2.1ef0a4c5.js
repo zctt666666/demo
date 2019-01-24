@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["pages-test2-test2"],{"9cef":function(e,t,n){"use strict";n.r(t);var s=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("v-uni-view",[e._v("2")])},u=[],i=n("2877"),l={},c=Object(i["a"])(l,s,u,!1,null,null,null);c.options.__file="test2.vue";t["default"]=c.exports}}]);
