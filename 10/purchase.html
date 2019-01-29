@@ -7,16 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<!-- import CSS -->
-<link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
-<!-- import JavaScript -->
-<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
-<!-- 引入样式 -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-<!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <style>
     body,div{
         margin: 0;
@@ -26,14 +22,13 @@
 
 <body>
     <div id="app">
+        <el-button :plain="true" @click="open2" v-if="false">成功</el-button>
+        <el-button :plain="true" @click="open3" v-if="false">成功</el-button>
         <div v-show="infos" class="loading">
             <div>{{info}}</div>
         </div>
         <div class="content" id="appp">
-            <!-- <div class="title">采购意向</div>
-                    <div class="line"></div>-->
             <div class="picture">
-
                 <img :src="img" alt>
             </div>
             <div class="productName">
@@ -43,7 +38,6 @@
             <div class="inputBox">
                 <span style="color:#fff;">*1</span>
                 <input type="text" placeholder="请输入设备名称" v-model="proname" readonly="readonly">
-                <!-- <div class="input">{{proname}}</div> -->
             </div>
             <div class="productName">
                 <span style="color:red;">*</span>
@@ -52,7 +46,6 @@
             <div class="inputBox">
                 <span style="color:#fff;">*1</span>
                 <input type="text" placeholder="请输入设备型号" v-model="promodel" readonly="readonly">
-                <!-- <div class="input">{{promodel}}</div> -->
             </div>
             <div class="productName">
                 <span style="color:red;">*</span>
@@ -91,7 +84,6 @@
         </div>
     </div>
 </body>
-<!-- import { Toast } from "mint-ui"; -->
 <script>
     var app = new Vue({
 
@@ -111,8 +103,6 @@
 
         },
         mounted() {
-            console.log(window.location.search.split('&')[0].split('=')[1])
-            console.log(window.location.search.split('&')[1].split('=')[1])
             this.proname = window.location.search.split('&')[0].split('=')[1];
             this.promodel = window.location.search.split('&')[1].split('=')[1];
             var a = this.promodel;
@@ -159,6 +149,15 @@
             };
         },
         methods: {
+            open2() {
+                this.$message({
+                    message: '提交成功',
+                    type: 'success'
+                });
+            },
+            open4() {
+                this.$message.error('提交失败');
+            },
             submit() {
                 var that = this
                 if (this.proname == "") {
@@ -238,30 +237,14 @@
                     success: function (res) {
                         console.log(res);
                         if (res.code == 1) {
-                            // that.open2()
-                            that.info = "提交成功"
-                            that.infos = true
-                            setTimeout(() => {
-                                that.info = ""
-                                that.infos = false
-                            }, 1500)
+                            that.open2()
                         } else {
-                            that.info = "提交失败"
-                            that.infos = true
-                            setTimeout(() => {
-                                that.info = ""
-                                that.infos = false
-                            }, 1500)
+                            that.open4()
                         }
                     },
                     error: function (msg) {
                         console.log(msg);
-                        that.info = "提交失败"
-                        that.infos = true
-                        setTimeout(() => {
-                            that.info = ""
-                            that.infos = false
-                        }, 1500)
+                        that.open4()
                     }
                 });
             }
@@ -428,7 +411,9 @@
     }
 
     .loading>div {
-        background: #888;
+        background: #000;
+        opacity: 0.7;
+        font-size: 12px;
         color: #fff;
         padding: 10px;
         border-radius: 4px;
