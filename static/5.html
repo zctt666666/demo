@@ -54,8 +54,10 @@
         <div id="loads">上传成功</div>
     </div>
     <div style="padding:10px;">
-        <p><input type="file" id="upfile" accept=".pdf"></p>
+            <form id="index_form" name="index_form" role="form" method="post" class="form-horizontal" enctype="multipart/form-data">
+        <p><input type="file" id="upfile"></p>
         <p style="margin-top:10px;"><input type="button" id="upJQuery" value="点击上传" onclick="a()"></p>
+            </form>
     </div>
     <script type="text/javascript">
     function a(){
