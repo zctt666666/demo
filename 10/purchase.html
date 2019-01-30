@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>采购意向</title>
 </head>
 <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
@@ -21,7 +21,7 @@
 </style>
 
 <body>
-    <div id="app">
+    <div id="app2">
         <el-button :plain="true" @click="open2" v-if="false">成功</el-button>
         <el-button :plain="true" @click="open3" v-if="false">成功</el-button>
         <div v-show="infos" class="loading">
@@ -80,20 +80,24 @@
                 <textarea placeholder="请输入留言" v-model="message" maxlength="100"></textarea>
                 <div class="num">{{message.length}}/100</div>
             </div>
-            <div class="btn" @click="submit">提交</div>
+            <div class="inputBox">
+                <span style="color:#fff;">*1</span>
+                <span class="btn" @click="submit">提交</sspan>
+            </div>
+
         </div>
     </div>
 </body>
 <script>
     var app = new Vue({
 
-        el: '#app',
+        el: '#app2',
         data: {
             infos: false,
             info: '',
             img: "",
-            proname: "2",
-            promodel: "1",
+            proname: "",
+            promodel: "",
             contacts: "",
             phone: "",
             company: "",
@@ -104,23 +108,34 @@
         },
         mounted() {
             // this.proname = window.location.search.split('&')[0].split('=')[1];
-            // this.promodel = window.location.search.split('&')[1].split('=')[1];
-            // var a = this.promodel;
-            console.log(this.img)
-            var a = "B720";
-            this.img = "img/" + a + ".png";
+            this.promodel = window.location.search.split('&')[0].split('=')[1];
+            var model = this.promodel;
+            if (this.promodel == 'B720') {
+                this.proname = 'B720车载温湿度监控仪'
+            }
+            if (this.promodel == 'B830') {
+                this.proname = 'B830车载温湿度监控仪'
+            }
+            if (this.promodel == 'TX') {
+                this.proname = 'TX多温度实时监控仪'
+            }
+            if (this.promodel == 'T2') {
+                this.proname = 'T2便携式温湿度监控仪'
+            }
+            if (this.promodel == 'T3') {
+                this.proname = 'T3便携式温湿度记录仪'
+            }
+            // 改图片路径
+            this.img = "img/" + model + ".png";
             console.log(this.img)
             console.log($(".appp"));
             var hrt = document.documentElement.clientHeight;
             document.getElementById("appp").style.height = hrt + "px";
             var h1 = $("body").height();
             var h2 = $("#appp").height();
-            // var h3 = $('#main').height();
             $(window).resize(function () {
                 $("body").height(h1);
                 $("#appp").height(h2);
-                // $('#main').height(h3);
-                // $('#main').css('top', h2);
             });
             window.onload = function () {
                 document.addEventListener("gesturestart", function (e) {
@@ -218,19 +233,15 @@
                 function callback(a) {
                     alert(a.msg);
                 }
-
-                // return
                 $.ajax({
                     url: "https://123gps.com.cn/rest/buyingIntentionInfo/addBuyingIntentionInfo",
                     data: {
-                        // equipmentNo:'1',
                         equipmentNo: that.promodel,
                         contacts: that.contacts,
                         phone: that.phone,
                         company: that.company,
                         leaveWord: that.message,
-                        remark: that.proname,
-                        // remark:'2',
+                        remark: that.proname
                     },
                     async: false,
                     type: "post",
@@ -238,6 +249,12 @@
                         console.log(res);
                         if (res.code == 1) {
                             that.open2()
+                            that.promodel = '',
+                                that.contacts = '',
+                                that.phone = '',
+                                that.company = '',
+                                that.message = '',
+                                that.proname = ''
                         } else {
                             that.open4()
                         }
@@ -253,7 +270,7 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    #app {
+    #app2 {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -261,7 +278,6 @@
         color: #2c3e50;
         margin: 0;
         padding: 0;
-        /* height: 100vh; */
     }
 
     input textarea {
@@ -298,7 +314,6 @@
     .content {
         width: 100%;
         height: 100vh;
-        /* overflow: hidden; */
         background: #fff;
         display: flex;
         flex-direction: column;
@@ -314,41 +329,31 @@
     }
 
     .picture {
-        /* height: 20vh; */
         width: 100%;
         text-align: center;
+        margin-bottom: 0 !important;
     }
 
     .picture>img {
-        /* height: 20vh; */
         width: 76%;
-        padding: 10px 0;
     }
 
     .productName {
         box-sizing: border-box;
-        /* border:1px solid red; */
-        /* height: 4vh;
-          line-height: 5vh; */
         width: 90%;
         text-align: left;
-        /* margin-top: 1vh; */
     }
 
     .inputBox {
         box-sizing: border-box;
-        /* height: 5vh; */
-        /* border:1px solid red; */
         width: 90%;
         text-align: left;
-        /* margin-top: 10px; */
         position: relative;
     }
 
     .inputBoxs {
         display: flex;
         flex-direction: row;
-        /* line-height: 60px; */
     }
 
     .num {
@@ -365,37 +370,37 @@
 
     input {
         width: 90%;
-        /* height: 60px; */
         border-top: 0px;
         border-left: 0px;
         border-right: 0px;
         outline: none;
-        border-bottom: 1px solid rgba(0,0,0,0.2);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     }
 
     textarea {
-        /* margin-top: 1vh; */
-        border: 1px solid rgba(0,0,0,0.2);
+        border: 1px solid rgba(0, 0, 0, 0.2);
     }
 
     .btn {
-        width: 82%;
+        display: inline-block;
+        width: 90%;
+        overflow: hidden;
+        text-align: center;
+        box-sizing: border-box;
         background: #0368d0;
         border-radius: 6px;
         color: #fff;
         padding: 10px 0;
         font-size: 15px;
         margin-bottom: 10px;
-        margin-left: 10px;
-        /* height: 6vh; */
-        /* line-height: 6vh; */
     }
 
     textarea {
         padding: 6px;
         border-radius: 6px;
-        width: 86%;
-        /* height: 5vh; */
+        width: 90%;
+        overflow: hidden;
+        box-sizing: border-box;
     }
 
     .loading {
@@ -404,7 +409,6 @@
         top: 0;
         width: 100%;
         height: 100vh;
-        /* background: #fff; */
         display: flex;
         justify-content: center;
         align-items: center;
