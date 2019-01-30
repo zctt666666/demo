@@ -103,11 +103,11 @@
 
         },
         mounted() {
-            this.proname = window.location.search.split('&')[0].split('=')[1];
-            this.promodel = window.location.search.split('&')[1].split('=')[1];
-            var a = this.promodel;
+            // this.proname = window.location.search.split('&')[0].split('=')[1];
+            // this.promodel = window.location.search.split('&')[1].split('=')[1];
+            // var a = this.promodel;
             console.log(this.img)
-            // var a = "B720";
+            var a = "B720";
             this.img = "img/" + a + ".png";
             console.log(this.img)
             console.log($(".appp"));
@@ -322,7 +322,7 @@
     .picture>img {
         /* height: 20vh; */
         width: 76%;
-        padding: 20px 0;
+        padding: 10px 0;
     }
 
     .productName {
@@ -370,12 +370,12 @@
         border-left: 0px;
         border-right: 0px;
         outline: none;
-        border-bottom: 1px solid #888;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
     }
 
     textarea {
         /* margin-top: 1vh; */
-        border: 1px solid #888;
+        border: 1px solid rgba(0,0,0,0.2);
     }
 
     .btn {
