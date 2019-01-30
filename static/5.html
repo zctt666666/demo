@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <title>文件上传</title>
@@ -73,6 +74,27 @@
 img{
     width:100px;
 }
+body{
+    width: 100vw;
+    overflow: hidden;
+}
+.conter>form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-items: center;
+}
+.conter>form>a{
+    margin: 10px 0;
+}
+.conter>form>a:nth-child(2){
+    text-align: left;
+}
+#text{
+    width: 100%;
+    word-wrap: break-word;
+}
 </style>
 
 <body>
@@ -82,26 +104,28 @@ img{
     <div class="loadings">
         <div id="loads">上传成功</div>
     </div>
-    <div style="padding:10px;">
-            <form id="index_form" name="index_form" role="form" method="post" class="form-horizontal" enctype="multipart/form-data">
-        <a href="javascript:;" class="file">选择文件
+    <div style="padding:10px;" class="conter">
+        <form id="index_form" name="index_form" role="form" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <a href="javascript:;" class="file">选择文件
                 <input type="file" name="" id="upfile">
-        </a>
-        <a href="">C:/fakepath/1.png</a>
-        <a href="javascript:;" class="file">点击上传
+            </a>
+            <a href="javascript:;" id="text" style="text-decoration:none;color:#333;">文件路径：</a>
+            <a href="javascript:;" class="file">点击上传
                 <input type="button" id="upJQuery" value="点击上传" onclick="a()">
-        </a>
-            </form>
+            </a>
+        </form>
     </div>
     <script type="text/javascript">
-    function a(){
-        console.log(123)
-    }
-    a()
+        function a() {
+            console.log(123)
+        }
+        a()
         var loading = document.getElementsByClassName('loading')[0];
         var loadings = document.getElementsByClassName('loadings')[0];
         $('#upJQuery').on('click', function () {
             console.log(document.getElementById("upfile").value)
+            document.getElementById("text").innerText='文件路径：'+document.getElementById("upfile").value
+            console.log(document.getElementById("text"))
             loading.style.visibility = "visible";
             var fd = new FormData();
             fd.append("upload", 1);
