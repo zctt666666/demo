@@ -44,6 +44,35 @@
         border-radius: 4px;
         color:#fff;
     }
+    .file {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+.file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+}
+img{
+    width:100px;
+}
 </style>
 
 <body>
@@ -55,8 +84,13 @@
     </div>
     <div style="padding:10px;">
             <form id="index_form" name="index_form" role="form" method="post" class="form-horizontal" enctype="multipart/form-data">
-        <p><input type="file" id="upfile"></p>
-        <p style="margin-top:10px;"><input type="button" id="upJQuery" value="点击上传" onclick="a()"></p>
+        <a href="javascript:;" class="file">选择文件
+                <input type="file" name="" id="upfile">
+        </a>
+        <a href="">C:/fakepath/1.png</a>
+        <a href="javascript:;" class="file">点击上传
+                <input type="button" id="upJQuery" value="点击上传" onclick="a()">
+        </a>
             </form>
     </div>
     <script type="text/javascript">
@@ -67,10 +101,11 @@
         var loading = document.getElementsByClassName('loading')[0];
         var loadings = document.getElementsByClassName('loadings')[0];
         $('#upJQuery').on('click', function () {
+            console.log(document.getElementById("upfile").value)
             loading.style.visibility = "visible";
             var fd = new FormData();
             fd.append("upload", 1);
-            fd.append("file", $("#upfile").get(0).files[0]);
+            fd.append("multipartFile", $("#upfile").get(0).files[0]);
             $.ajax({
                 url: "http://192.168.0.140:8080/jycoldchain/ColdInformationDisseminationController/upload",
                 type: "POST",
