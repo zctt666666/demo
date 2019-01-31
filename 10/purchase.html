@@ -82,7 +82,7 @@
             </div>
             <div class="inputBox">
                 <span style="color:#fff;">*1</span>
-                <span class="btn" @click="submit">提交</sspan>
+                <span class="btn" @click="submit">提交</span>
             </div>
 
         </div>
@@ -90,7 +90,6 @@
 </body>
 <script>
     var app = new Vue({
-
         el: '#app2',
         data: {
             infos: false,
@@ -268,7 +267,7 @@
         }
     })
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
     #app2 {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -321,27 +320,23 @@
         align-items: center;
         overflow: hidden;
     }
-
-    .title {
-        width: 100%;
-        padding: 20px;
-        font-size: 28px;
-    }
-
     .picture {
         width: 100%;
+        box-sizing: border-box;
+        /* border:1px solid red; */
         text-align: center;
-        margin-bottom: 0 !important;
+        margin-bottom: -10px !important;
     }
 
     .picture>img {
-        width: 76%;
+        width: 70%;
     }
 
     .productName {
         box-sizing: border-box;
         width: 90%;
         text-align: left;
+        font-size: 15px;
     }
 
     .inputBox {
@@ -349,6 +344,7 @@
         width: 90%;
         text-align: left;
         position: relative;
+        
     }
 
     .inputBoxs {
@@ -366,21 +362,17 @@
         width: 90%;
         height: 60px;
         border-bottom: 1px solid #888;
+        font-size: 15px;
     }
 
     input {
         width: 90%;
-        border-top: 0px;
-        border-left: 0px;
-        border-right: 0px;
+        border: 0;
         outline: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        font-size: 15px;
+        box-sizing: border-box;
     }
-
-    textarea {
-        border: 1px solid rgba(0, 0, 0, 0.2);
-    }
-
     .btn {
         display: inline-block;
         width: 90%;
@@ -394,11 +386,13 @@
         font-size: 15px;
         margin-bottom: 10px;
     }
-
     textarea {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        font-size: 15px;
         padding: 6px;
         border-radius: 6px;
         width: 90%;
+        height: 70px;
         overflow: hidden;
         box-sizing: border-box;
     }
