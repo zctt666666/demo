@@ -171,6 +171,16 @@
       </td>
     </tr>
   </table>
+  <script>
+
+    fetch('https://www.easy-mock.com/mock/5c3d2a9f104cf65fdcb733a6/example/addRouter').then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log(data);
+    }).catch(function (e) {
+      console.log("Oops, error");
+    });
+  </script>
 </body>
 
 </html>
